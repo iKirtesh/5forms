@@ -1,97 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <head>
+<head>
     <title>To-Do List</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
     <div class="container mt-4">
-      <h1>To-Do List</h1>
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="taskInput"
-          placeholder="Add a new task"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-primary" id="addTaskBtn">Add Task</button>
+        <h1>To-Do List</h1>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="taskInput" placeholder="Add a new task">
+            <div class="input-group-append">
+                <button class="btn btn-primary" id="addTaskBtn">Add Task</button>
+            </div>
         </div>
-      </div>
-      <ul class="list-group" id="taskList"></ul>
-      <a href="home.html" class="btn btn-secondary mt-3">Back to Home</a>
+        <ul class="list-group" id="taskList">
+        </ul>
+        <a href="index.html" class="btn btn-secondary mt-3">Back to Home</a>
     </div>
 
     <script>
-      // Load tasks for the current user
-      var userTasks =
-        JSON.parse(localStorage.getItem(currentUser.email + "_tasks")) || [];
+        document.getElementById("addTaskBtn").addEventListener("click", function() {
+            var taskInput = document.getElementById("taskInput");
+            var taskText = taskInput.value.trim();
+            if (taskText !== "") {
+                var taskList = document.getElementById("taskList");
+                var li = document.createElement("li");
+                li.className = "list-group-item";
+                li.textContent = taskText;
 
-      // Display existing tasks
-      var taskList = document.getElementById("taskList");
-      userTasks.forEach(function (taskText) {
-        var li = document.createElement("li");
-        li.className = "list-group-item";
-        li.textContent = taskText;
+                var deleteBtn = document.createElement("button");
+                deleteBtn.className = "btn btn-danger btn-sm float-right";
+                deleteBtn.textContent = "Delete";
+                deleteBtn.addEventListener("click", function() {
+                    taskList.removeChild(li);
+                });
 
-        var deleteBtn = document.createElement("button");
-        deleteBtn.className = "btn btn-danger btn-sm float-right";
-        deleteBtn.textContent = "Delete";
-        deleteBtn.addEventListener("click", function () {
-          // Remove the task and update local storage
-          userTasks.splice(userTasks.indexOf(taskText), 1);
-          localStorage.setItem(
-            currentUser.email + "_tasks",
-            JSON.stringify(userTasks)
-          );
-          taskList.removeChild(li);
-        });
-
-        li.appendChild(deleteBtn);
-        taskList.appendChild(li);
-      });
-
-      // Add a new task
-      document
-        .getElementById("addTaskBtn")
-        .addEventListener("click", function () {
-          var taskInput = document.getElementById("taskInput");
-          var taskText = taskInput.value.trim();
-          if (taskText !== "") {
-            // Update the task list and local storage
-            userTasks.push(taskText);
-            localStorage.setItem(
-              currentUser.email + "_tasks",
-              JSON.stringify(userTasks)
-            );
-
-            var li = document.createElement("li");
-            li.className = "list-group-item";
-            li.textContent = taskText;
-
-            var deleteBtn = document.createElement("button");
-            deleteBtn.className = "btn btn-danger btn-sm float-right";
-            deleteBtn.textContent = "Delete";
-            deleteBtn.addEventListener("click", function () {
-              userTasks.splice(userTasks.indexOf(taskText), 1);
-              localStorage.setItem(
-                currentUser.email + "_tasks",
-                JSON.stringify(userTasks)
-              );
-              taskList.removeChild(li);
-            });
-
-            li.appendChild(deleteBtn);
-            taskList.appendChild(li);
-            taskInput.value = "";
-          }
+                li.appendChild(deleteBtn);
+                taskList.appendChild(li);
+                taskInput.value = "";
+            }
         });
     </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>
