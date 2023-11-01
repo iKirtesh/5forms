@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-4">
+      <h1>BMI Calculator</h1>
+      <div class="form-group">
+        <label for="weight">Weight (kg):</label>
+        <input
+          type="number"
+          class="form-control"
+          id="weight"
+          placeholder="Enter your weight in kilograms"
+        />
+      </div>
+      <div class="form-group">
+        <label for="height">Height (cm):</label>
+        <input
+          type="number"
+          class="form-control"
+          id="height"
+          placeholder="Enter your height in centimeters"
+        />
+      </div>
+      <button class="btn btn-primary" id="calculateBtn">Calculate BMI</button>
+      <div class="mt-3">
+        <p><strong>Your BMI:</strong> <span id="bmiResult"></span></p>
+        <p>
+          <strong>Interpretation:</strong> <span id="interpretation"></span>
+        </p>
+      </div>
+      <ul class="list-group" id="taskList"></ul>
+      <a href="home.html" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+
+    <script>
+      document
+        .getElementById("calculateBtn")
+        .addEventListener("click", function () {
+          // Get the input values
+          var weight = parseFloat(document.getElementById("weight").value);
+          var height = parseFloat(document.getElementById("height").value);
+
+          if (!isNaN(weight) && !isNaN(height) && height > 0) {
+            // Calculate BMI
+            var heightInMeters = height / 100;
+            var bmi = weight / (heightInMeters * heightInMeters);
+
+            // Display BMI and interpretation
+            document.getElementById("bmiResult").textContent = bmi.toFixed(2);
+            document.getElementById("interpretation").textContent =
+              getInterpretation(bmi);
+          } else {
+            alert("Please enter valid weight and height values.");
+          }
+        });
+
+      function getInterpretation(bmi) {
+        if (bmi < 18.5) {
+          return "Underweight";
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+          return "Normal Weight";
+        } else if (bmi >= 25 && bmi < 29.9) {
+          return "Overweight";
+        } else {
+          return "Obese";
+        }
+      }
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

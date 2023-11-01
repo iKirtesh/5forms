@@ -1,0 +1,73 @@
+<!-- Crate a form using bootstrap with inline css-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container mt-4">
+      <h1>Temperature Converter</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="celsius">Celsius:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="celsius"
+              placeholder="Enter temperature in Celsius"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fahrenheit">Fahrenheit:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="fahrenheit"
+              placeholder="Enter temperature in Fahrenheit"
+            />
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="convertBtn">Convert</button>
+      <ul class="list-group" id="taskList"></ul>
+      <a href="home.html" class="btn btn-secondary mt-3">Back to Home</a>
+    </div>
+
+    <script>
+      document
+        .getElementById("convertBtn")
+        .addEventListener("click", function () {
+          // Get the input values
+          var celsiusInput = document.getElementById("celsius").value;
+          var fahrenheitInput = document.getElementById("fahrenheit").value;
+
+          if (celsiusInput !== "") {
+            // Convert Celsius to Fahrenheit
+            var celsiusValue = parseFloat(celsiusInput);
+            var fahrenheitValue = (celsiusValue * 9) / 5 + 32;
+            document.getElementById("fahrenheit").value =
+              fahrenheitValue.toFixed(2);
+          } else if (fahrenheitInput !== "") {
+            // Convert Fahrenheit to Celsius
+            var fahrenheitValue = parseFloat(fahrenheitInput);
+            var celsiusValue = ((fahrenheitValue - 32) * 5) / 9;
+            document.getElementById("celsius").value = celsiusValue.toFixed(2);
+          }
+        });
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

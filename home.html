@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-4 text-center">
+      <h1>Welcome to Our Website</h1>
+      <div class="row mt-4">
+        <div class="col-md-4 offset-md-4">
+          <!-- Check if the user is logged in -->
+          <script>
+            var currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            if (currentUser) {
+          </script>
+          <a href="temp.html" class="btn btn-primary btn-block mb-3">
+            Temperature Calculator
+          </a>
+          <a href="bmi.html" class="btn btn-primary btn-block mb-3"
+            >BMI Calculator</a
+          >
+          <a href="todo.html" class="btn btn-primary btn-block mb-3"
+            >To-Do List</a
+          >
+          <a href="login.html" class="btn btn-danger btn-block">Log Out</a>
+          <!-- Close the script tag -->
+          <script>
+            } else {
+              // If the user is not logged in, redirect to the login page
+              window.location.href = "login.html";
+            }
+          </script>
+        </div>
+      </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
